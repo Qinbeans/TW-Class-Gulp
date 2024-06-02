@@ -1,0 +1,17 @@
+{
+    "root": "/views",
+    "page_definition": [
+        "page",
+        "components/header"
+    ],
+    "component_definition": [
+        "component",
+        "components/header"
+    ],
+    "recipes": [
+        {
+            "name": "home",
+            "component": "components/pages/home"
+        }
+    ]
+}
