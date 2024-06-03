@@ -12,6 +12,10 @@
         {
             "name": "home",
             "component": "components/pages/home"
+        },
+        {
+            "name": "something",
+            "component": "components/pages/something"
         }
     ]
 }

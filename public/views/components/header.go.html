@@ -1,13 +1,16 @@
 {{define "header"}}
-<header class="grid grid-cols-3 grid-rows-2">
+<header class="grid grid-cols-3 grid-rows-2 h-16 gap-y-2 fixed w-dvw backdrop-blur-md">
+    <h1 class="text-2xl text-center col-start-2 row-start-1 font-extrabold">
+        {{.title}}
+    </h1>
     <section class="col-start-2 row-start-2">
         <ul class="flex flex-row gap-3 text-xl justify-center">
             {{range .items}}
             <li>
                 {{if .selected}}
-                    <span class="text-gray-400">{{.label}}</span>
+                    <span class="text-gray-400 w-32 bg-pink-200 rounded-lg border-black border-2 px-2">{{.label}}</span>
                 {{else}}
-                    <a href="{{.url}}" hx-boost="true" hx-target="#main-content" class="text-blue-400 hover:text-purple-600 transition duration-300 ease-in-out">{{.label}}</a>
+                    <a href="{{.url}}" hx-boost="true" hx-target="#main-content" class="text-blue-400 w-32 border-2 border-transparent hover:text-purple-600 hover:bg-pink-300 rounded-lg hover:border-black px-2 transition duration-500 ease-in-out">{{.label}}</a>
                 {{end}}
             </li>
             {{end}}

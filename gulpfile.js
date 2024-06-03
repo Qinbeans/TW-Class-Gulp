@@ -80,11 +80,6 @@ gulp.task('css:release', function () {
     .pipe(gulp.dest('dist/static/style/'));
 });
 
-gulp.task('watch', function () {
-  gulp.watch('public/static/styles/**/*.css', gulp.series('css'));
-  gulp.watch('public/views/**/*.html', gulp.series('css'));
-});
-
 gulp.task('template', function () {
   // move html files from public/views to temp/views with class names replaced
   return gulp.src('public/views/**/*.html')
@@ -99,12 +94,18 @@ gulp.task('template:release', function () {
     .pipe(gulp.dest('dist/views/'));
 });
 
+gulp.task('statics', function () {
+  // move everything except views and styles to temp
+  return gulp.src(['public/**/*', '!public/views/**/*', '!public/static/styles/**/*'])
+    .pipe(gulp.dest('tmp/'));
+});
+
 gulp.task('statics:release', function () {
   // move everything except views and styles to dist
   return gulp.src(['public/**/*', '!public/views/**/*', '!public/static/styles/**/*'])
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('release', gulp.series('extract-classes:release', 'css:release', 'template:release', 'statics:release'));
+gulp.task('release', gulp.series('statics:release', 'extract-classes:release', 'css:release', 'template:release'));
 
-gulp.task('default', gulp.series('extract-classes', 'css', 'template'));
+gulp.task('default', gulp.series('statics', 'extract-classes', 'css', 'template'));

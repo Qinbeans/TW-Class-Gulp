@@ -99,7 +99,8 @@ func NewEngine(mode string) *TemplateEngine {
 }
 
 func GetBoosted(r *http.Request) bool {
-	return r.URL.Query().Get("Hx-Boosted") == "true"
+	_, ok := r.Header["Hx-Boosted"]
+	return ok
 }
 
 func (t *TemplateEngine) Render(w http.ResponseWriter, name string, data interface{}) error {

@@ -45,6 +45,7 @@ func main() {
 	tmpl := template.NewEngine(mode)
 
 	mux.HandleFunc("/", tmpl.Home)
+	mux.HandleFunc("/something", tmpl.Something)
 	mux.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
 		if mode == "dev" {
 			r.URL.Path = "tmp" + r.URL.Path
@@ -54,7 +55,7 @@ func main() {
 		http.ServeFile(w, r, r.URL.Path)
 	})
 
-	log.Printf("%sServer running at %s", logger.INFO, address)
+	log.Printf("%sServer running at http://%s", logger.INFO, address)
 	if err := http.ListenAndServe(address, logger.Logger(mux)); err != nil {
 		log.Fatal(logger.ERROR, err)
 	}
